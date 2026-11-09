@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#081226" />
+  <title>Badadanda Premier League | BPL</title>
+  <style>
+    :root{--bg:#07101f;--panel:#101d33;--panel2:#152641;--line:#263956;--gold:#f6c453;--text:#f4f7fb;--muted:#a9b7ca;--green:#35d39a;--red:#ff6b75}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% 0%,#172c4e 0,#07101f 40%);color:var(--text);font-family:Inter,system-ui,Segoe UI,Arial,sans-serif}
+    header{position:sticky;top:0;z-index:5;background:#07101feF;border-bottom:1px solid var(--line);backdrop-filter:blur(14px)}
+    .wrap{width:min(1160px,92%);margin:auto}.top{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:16px 0}
+    .brand{display:flex;align-items:center;gap:12px}.mark{width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,#f7d16d,#bd7d1b);display:grid;place-items:center;color:#101827;font-weight:1000;font-size:19px;box-shadow:0 8px 25px #f6c45330}
+    .brand h1{font-size:17px;letter-spacing:.08em;margin:0}.brand small{display:block;color:var(--gold);font-size:10px;letter-spacing:.22em;margin-top:3px}
+    nav{display:flex;gap:8px;flex-wrap:wrap}nav a{color:var(--muted);text-decoration:none;font-size:13px;padding:9px 11px;border-radius:9px}nav a:hover{background:var(--panel2);color:white}
+    .hero{padding:46px 0 28px;display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center}
+    .eyebrow{color:var(--gold);font-weight:800;letter-spacing:.2em;font-size:11px}.hero h2{font-size:clamp(32px,5vw,58px);line-height:1.03;margin:13px 0}.hero p{color:var(--muted);max-width:580px;line-height:1.7}
+    .hero-card{background:linear-gradient(145deg,#1b3154,#101b30);border:1px solid #385070;border-radius:22px;padding:24px;box-shadow:0 20px 60px #0005}.hero-card .big{font-size:48px;font-weight:900;color:var(--gold);letter-spacing:-.05em}.hero-card p{margin:0}
+    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.btn{border:0;border-radius:10px;padding:11px 15px;font-weight:800;cursor:pointer;background:var(--gold);color:#142033}.btn.secondary{background:#243956;color:white;border:1px solid #3b5374}.btn.danger{background:#592b38;color:#fff}.btn:disabled{opacity:.5;cursor:not-allowed}
+    section{padding:22px 0 34px;scroll-margin-top:90px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:16px}.section-head h3{margin:0;font-size:22px}.section-head p{margin:5px 0 0;color:var(--muted);font-size:13px}
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.team{background:linear-gradient(145deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:16px;padding:17px;min-height:130px}.team .badge{width:42px;height:42px;border-radius:13px;background:#263c5b;display:grid;place-items:center;color:var(--gold);font-weight:900;margin-bottom:13px}.team h4{margin:0;font-size:15px}.team small{color:var(--muted)}
+    .two{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}.panel{background:linear-gradient(145deg,#12213a,#0d192c);border:1px solid var(--line);border-radius:17px;padding:18px;min-width:0}.panel h4{margin:0 0 14px;font-size:16px}
+    .empty{color:var(--muted);border:1px dashed #405472;padding:22px;border-radius:12px;text-align:center;font-size:13px}
+    .match{border:1px solid var(--line);background:#0b1729;border-radius:13px;padding:15px;margin-bottom:11px}.match-top{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.1em}.live{color:var(--green);font-weight:900}.teamsline{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;margin:16px 0}.side strong{display:block;font-size:14px}.side small{color:var(--muted)}.side.right{text-align:right}.score{font-size:22px;font-weight:900}.vs{color:var(--gold);font-size:11px;font-weight:900}
+    table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:12px 9px;border-bottom:1px solid var(--line);text-align:left}th{color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.1em}td.num,th.num{text-align:right}
+    .admin{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:6px;margin-bottom:11px}.field label{font-size:12px;color:var(--muted)}input,select{width:100%;background:#081426;color:white;border:1px solid #344a68;border-radius:9px;padding:11px;font:inherit}input:focus,select:focus{outline:2px solid #f6c45366;border-color:var(--gold)}
+    .hidden{display:none!important}.notice{font-size:12px;color:var(--muted);line-height:1.6}.status{font-size:12px;color:var(--green);min-height:18px}.footer{border-top:1px solid var(--line);padding:24px 0;color:var(--muted);font-size:12px;margin-top:20px}
+    @media(max-width:850px){.hero,.two{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}.admin{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}}
+    @media(max-width:480px){.grid{grid-template-columns:1fr 1fr}.brand h1{font-size:14px}nav a{padding:8px;font-size:12px}.hero{padding-top:30px}.hero-card .big{font-size:38px}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap top">
+    <div class="brand"><div class="mark">BPL</div><div><h1>BADADANDA PREMIER LEAGUE</h1><small>THE VILLAGE CRICKET CHAMPIONSHIP</small></div></div>
+    <nav>
+      <a href="#home">Home</a><a href="#live">Live Score</a><a href="#teams">Teams</a><a href="#points">Points Table</a><a href="#schedule">Schedule</a><a href="#admin">Admin</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  <section class="hero" id="home">
+    <div><div class="eyebrow">WELCOME TO BPL</div><h2>THE GAME.<br><span style="color:var(--gold)">THE GLORY.</span></h2><p>Follow Badadanda Premier League with live scores, team updates, match results and tournament standings — all in one place.</p>
+      <div class="actions"><a class="btn" href="#live" style="text-decoration:none">View Live Score</a><a class="btn secondary" href="#schedule" style="text-decoration:none">Match Schedule</a></div>
+    </div>
+    <div class="hero-card"><div class="eyebrow">TOURNAMENT HUB</div><div class="big">BPL</div><p>Four teams. One trophy. Every run counts.</p><div style="height:1px;background:#3b5270;margin:20px 0"></div><div style="display:flex;justify-content:space-between;color:var(--muted);font-size:12px"><span>TEAMS</span><strong style="color:white">04</strong><span>LIVE UPDATES</span><strong style="color:var(--green)">ON</strong></div></div>
+  </section>
+  <section id="live">
+    <div class="section-head"><div><h3>Live & Recent Matches</h3><p>Scores refresh automatically when the admin updates them.</p></div><span class="eyebrow">MATCH CENTRE</span></div>
+    <div id="matches"><div class="empty">No matches added yet. Match details will appear here.</div></div>
+  </section>
+  <section id="teams">
+    <div class="section-head"><div><h3>Our Teams</h3><p>Four teams competing for the BPL trophy.</p></div><span class="eyebrow">SEASON TEAMS</span></div>
+    <div class="grid" id="teamsGrid">
+      <div class="team"><div class="badge">DD</div><h4>Dynamic Dominators</h4><small>Team 01</small></div>
+      <div class="team"><div class="badge">KW</div><h4>Krishiv Warriors</h4><small>Team 02</small></div>
+      <div class="team"><div class="badge">BBW</div><h4>Baba Barunei Warriors</h4><small>Team 03</small></div>
+      <div class="team"><div class="badge">H11</div><h4>Hunter-11</h4><small>Team 04</small></div>
+    </div>
+  </section>
+  <section id="points">
+    <div class="section-head"><div><h3>Points Table</h3><p>Standings are calculated from completed matches entered by the admin.</p></div><span class="eyebrow">LEAGUE STANDINGS</span></div>
+    <div class="panel"><div style="overflow-x:auto"><table><thead><tr><th>Team</th><th class="num">M</th><th class="num">W</th><th class="num">L</th><th class="num">Pts</th></tr></thead><tbody id="pointsBody"><tr><td colspan="5" class="empty">No completed matches yet.</td></tr></tbody></table></div></div>
+  </section>
+  <section id="schedule">
+    <div class="section-head"><div><h3>Match Schedule & Results</h3><p>Upcoming fixtures and completed match results.</p></div><span class="eyebrow">FIXTURES</span></div>
+    <div id="scheduleList"><div class="empty">The match schedule will appear here once added by the admin.</div></div>
+  </section>
+  <section id="admin">
+    <div class="section-head"><div><h3>Admin Control Panel</h3><p>Only the registered BPL admin can make changes.</p></div><span class="eyebrow">SECURE ACCESS</span></div>
+    <div class="panel" id="loginPanel">
+      <h4>Admin Login</h4><p class="notice">Sign in using the admin email and password you created in Firebase Authentication. Do not share your password.</p>
+      <div class="field"><label>Email</label><input id="email" type="email" autocomplete="username" placeholder="Admin email"></div>
+      <div class="field"><label>Password</label><input id="password" type="password" autocomplete="current-password" placeholder="Admin password"></div>
+      <button class="btn" id="loginBtn">Login</button><p class="status" id="loginStatus"></p>
+    </div>
+    <div class="panel hidden" id="adminPanel">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><h4>Welcome, Admin</h4><button class="btn secondary" id="logoutBtn">Logout</button></div>
+      <div class="admin">
+        <div>
+          <h4>Add a Match</h4>
+          <div class="field"><label>Team 1</label><select id="team1"></select></div>
+          <div class="field"><label>Team 2</label><select id="team2"></select></div>
+          <div class="field"><label>Match date & time</label><input id="matchDate" type="datetime-local"></div>
+          <button class="btn" id="addMatchBtn">Add Match</button><p class="status" id="matchStatus"></p>
+        </div>
+        <div>
+          <h4>Update Live Score</h4>
+          <div class="field"><label>Select match</label><select id="matchSelect"></select></div>
+          <div class="field"><label>Runs</label><input id="runs" type="number" min="0" value="0"></div>
+          <div class="field"><label>Wickets</label><input id="wickets" type="number" min="0" max="10" value="0"></div>
+          <div class="field"><label>Overs (e.g. 8.3)</label><input id="overs" type="text" value="0.0" placeholder="0.0"></div>
+          <div class="field"><label>Match status</label><select id="matchStatusSelect"><option value="Upcoming">Upcoming</option><option value="Live">Live</option><option value="Completed">Completed</option></select></div>
+          <button class="btn" id="updateScoreBtn">Save Score</button><p class="status" id="scoreStatus"></p>
+        </div>
+      </div>
+      <p class="notice">This first version supports match creation and basic score updates. Player profiles, photos, detailed batting/bowling stats and logos can be added later.</p>
+    </div>
+  </section>
+</main>
+<footer class="footer"><div class="wrap">© <span id="year"></span> Badadanda Premier League · BPL</div></footer>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+  import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+  import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, doc, updateDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+  // Firebase project configuration for BPL-2025.
+  const firebaseConfig = {
+    apiKey: "AIzaSyCjA5AW6QZ3fj4ABM112CcMgtYelq-xzcE",
+    authDomain: "bpl-2025.firebaseapp.com",
+    projectId: "bpl-2025",
+    storageBucket: "bpl-2025.firebasestorage.app",
+    messagingSenderId: "240724560573",
+    appId: "1:240724560573:web:2b016822e9d796b47785d4"
+  };
+  const ADMIN_UID = "3tXxjpYUKHVLnWrXwSgyCRkiiRg1";
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+  const teamNames = ["Dynamic Dominators","Krishiv Warriors","Baba Barunei Warriors","Hunter-11"];
+  const initials = ["DD","KW","BBW","H11"];
+  const el = id => document.getElementById(id);
+  let matches = [];
+  el("year").textContent = new Date().getFullYear();
+
+  function safeDate(value){ if(!value) return "Date not set"; const d = value.toDate ? value.toDate() : new Date(value); return isNaN(d) ? "Date not set" : d.toLocaleString(); }
+  function renderMatches(){
+    const target = el("matches"), schedule = el("scheduleList");
+    if(!matches.length){ target.innerHTML='<div class="empty">No matches added yet. The admin can add the first fixture after login.</div>'; schedule.innerHTML='<div class="empty">The match schedule will appear here once added by the admin.</div>'; }
+    else {
+      const sorted=[...matches].sort((a,b)=>(a.date?.seconds||0)-(b.date?.seconds||0));
+      target.innerHTML=sorted.filter(m=>m.status==="Live" || m.status==="Completed").map(m=>matchCard(m)).join("") || '<div class="empty">No live or completed matches right now.</div>';
+      schedule.innerHTML=sorted.map(m=>matchCard(m)).join("");
+    }
+    const select=el("matchSelect"); const current=select.value;
+    select.innerHTML=matches.map(m=>`<option value="${m.id}">${escapeHtml(m.team1)} vs ${escapeHtml(m.team2)} (${escapeHtml(m.status||"Upcoming")})</option>`).join("");
+    if(matches.some(m=>m.id===current)) select.value=current;
+    renderPoints();
+  }
+  function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+  function matchCard(m){
+    const state=m.status==="Live" ? '<span class="live">● LIVE</span>' : `<span>${escapeHtml(m.status||"Upcoming")}</span>`;
+    const s1=m.team1Score||{runs:0,wickets:0,overs:"0.0"}, s2=m.team2Score||{runs:0,wickets:0,overs:"0.0"};
+    return `<article class="match"><div class="match-top"><span>${safeDate(m.date)}</span>${state}</div><div class="teamsline"><div class="side"><strong>${escapeHtml(m.team1)}</strong><small>${s1.runs}/${s1.wickets} · ${escapeHtml(s1.overs)} ov</small></div><div class="vs">VS</div><div class="side right"><strong>${escapeHtml(m.team2)}</strong><small>${s2.runs}/${s2.wickets} · ${escapeHtml(s2.overs)} ov</small></div></div>${m.result?`<small style="color:var(--gold)">${escapeHtml(m.result)}</small>`:""}</article>`;
+  }
+  function renderPoints(){
+    const stats=teamNames.map(name=>({name,m:0,w:0,l:0,pts:0}));
+    matches.filter(m=>m.status==="Completed").forEach(m=>{const a=stats.find(t=>t.name===m.team1),b=stats.find(t=>t.name===m.team2); if(!a||!b)return; a.m++;b.m++; const winner=m.winner; if(winner===a.name){a.w++;a.pts+=2;b.l++;} else if(winner===b.name){b.w++;b.pts+=2;a.l++;} else {a.pts++;b.pts++;}});
+    stats.sort((a,b)=>b.pts-a.pts||b.w-a.w);
+    el("pointsBody").innerHTML=stats.map(t=>`<tr><td>${escapeHtml(t.name)}</td><td class="num">${t.m}</td><td class="num">${t.w}</td><td class="num">${t.l}</td><td class="num"><strong>${t.pts}</strong></td></tr>`).join("");
+  }
+  teamNames.forEach((name,i)=>{ const opt=document.createElement("option"); opt.value=name; opt.textContent=name; el("team1").append(opt); const opt2=document.createElement("option"); opt2.value=name; opt2.textContent=name; el("team2").append(opt2); });
+  el("team2").selectedIndex=1;
+
+  onSnapshot(query(collection(db,"matches"),orderBy("createdAt","desc")), snap=>{
+    matches=snap.docs.map(d=>({id:d.id,...d.data()})); renderMatches();
+  }, err=>{console.error(err);el("matches").innerHTML='<div class="empty">Could not load matches. Check your Firestore setup and internet connection.</div>';});
+
+  el("loginBtn").addEventListener("click",async()=>{
+    el("loginStatus").textContent="Signing in…";
+    try{await signInWithEmailAndPassword(auth,el("email").value.trim(),el("password").value);el("loginStatus").textContent="Login successful.";}
+    catch(e){el("loginStatus").textContent="Login failed. Check your email and password.";console.error(e);}
+  });
+  onAuthStateChanged(auth,user=>{
+    const isAdmin=!!user && user.uid===ADMIN_UID;
+    el("loginPanel").classList.toggle("hidden",isAdmin);
+    el("adminPanel").classList.toggle("hidden",!isAdmin);
+    if(user && !isAdmin){el("loginStatus").textContent="This account does not have BPL admin permission.";signOut(auth);}
+  });
+  el("logoutBtn").addEventListener("click",()=>signOut(auth));
+  el("addMatchBtn").addEventListener("click",async()=>{
+    const t1=el("team1").value,t2=el("team2").value;
+    if(t1===t2){el("matchStatus").textContent="Please select two different teams.";return;}
+    try{
+      await addDoc(collection(db,"matches"),{team1:t1,team2:t2,date:el("matchDate").value||null,status:"Upcoming",team1Score:{runs:0,wickets:0,overs:"0.0"},team2Score:{runs:0,wickets:0,overs:"0.0"},createdAt:serverTimestamp()});
+      el("matchStatus").textContent="Match added successfully.";
+    }catch(e){el("matchStatus").textContent="Could not add match. Check admin access and Firestore rules.";console.error(e);}
+  });
+  el("updateScoreBtn").addEventListener("click",async()=>{
+    const id=el("matchSelect").value; if(!id){el("scoreStatus").textContent="Add a match first.";return;}
+    const m=matches.find(x=>x.id===id); if(!m)return;
+    const runs=Number(el("runs").value), wickets=Number(el("wickets").value), overs=el("overs").value.trim(), status=el("matchStatusSelect").value;
+    if(!Number.isInteger(runs)||runs<0||!Number.isInteger(wickets)||wickets<0||wickets>10||!/^\d+(\.[0-5])?$/.test(overs)){el("scoreStatus").textContent="Enter valid runs, wickets (0–10), and overs (e.g. 8.3).";return;}
+    try{
+      const score={runs,wickets,overs};
+      const patch={status,team1Score:score,updatedAt:serverTimestamp()};
+      if(status==="Completed"){
+        const winner=prompt("Winner team name? Enter exactly: "+m.team1+" or "+m.team2+" (leave blank for a tie)");
+        if(winner && ![m.team1,m.team2].includes(winner.trim())){el("scoreStatus").textContent="Winner must match one of the two team names.";return;}
+        patch.winner=winner?winner.trim():null;
+        patch.result=winner?winner.trim()+" won": "Match tied";
+      }
+      await updateDoc(doc(db,"matches",id),patch);
+      el("scoreStatus").textContent="Score updated. Live viewers will see the change automatically.";
+    }catch(e){el("scoreStatus").textContent="Could not update score. Check admin access.";console.error(e);}
+  });
+  el("matchSelect").addEventListener("change",()=>{
+    const m=matches.find(x=>x.id===el("matchSelect").value); if(!m)return;
+    const s=m.team1Score||{runs:0,wickets:0,overs:"0.0"};
+    el("runs").value=s.runs;el("wickets").value=s.wickets;el("overs").value=s.overs;el("matchStatusSelect").value=m.status||"Upcoming";
+  });
+</script>
+</body>
+</html>
